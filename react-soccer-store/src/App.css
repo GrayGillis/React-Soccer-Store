@@ -36,10 +36,13 @@ body {
 #main-header button {
   font-size: 1.5rem;
   font-family: 'Lato', sans-serif;
+  background-color: #108614;
+  transition: transform 0.4s ;
 }
 
 #main-header button:hover {
   opacity: 0.5;
+  transform: scale(1.1);
 }
 
 h1 {

@@ -6,7 +6,7 @@ const SoccerStore = () => {
     return (
         <ul id="soccer-store">
             {soccerList.map((soccer) => (
-                <SoccerItem soccer={soccer}/>
+                <SoccerItem soccer={soccer} key={soccer.id}/>
             ))}
         </ul>
     )

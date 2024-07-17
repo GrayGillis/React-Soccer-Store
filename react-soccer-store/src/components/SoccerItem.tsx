@@ -9,6 +9,7 @@ const SoccerItem = (
         soccer: Soccer
     }
 ) => {
+    
     return (
         <li className='soccer-item'>
             <article>
@@ -16,10 +17,8 @@ const SoccerItem = (
                 <div>
                 <h3>{soccer.title}</h3>
                 <p className="soccer-item-price">
-                    {soccer.price}
-                    {/* {currencyFormatter.format(meal.price)} */}
+                    ${soccer.price.toFixed(2)}
                 </p>
-                {/* <p className="meal-item-description">{meal.description}</p> */}
                 </div>
                 <p className="soccer-item-actions">
                     <button>Add to Cart</button>
