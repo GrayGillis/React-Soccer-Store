@@ -4,6 +4,8 @@ type CartContextType = {
   items: [{
     id: number | null,
     quantity: number,
+    price: number,
+    title: string
   }],
   addItem: React.Dispatch<React.SetStateAction<any>>,
   removeItem: React.Dispatch<React.SetStateAction<any>>
@@ -12,7 +14,7 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>({
   items: [
-    { id: null, quantity: 0, }
+    { id: null, quantity: 0, price: 0, title: ''}
   ],
   addItem: (item: any) => {},
   removeItem: (id: any) => {},
