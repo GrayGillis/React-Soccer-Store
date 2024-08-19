@@ -2,8 +2,16 @@ import React, { useContext } from 'react'
 import UserProgressContext from '../contexts/UserProgressContext';
 import CartContext from '../contexts/CartContext';
 import { Dialog } from 'primereact/dialog';
+import Input from '../UI/Input';
+import { createPortal } from 'react-dom';
 
-const Checkout = () => {
+const Checkout = ({
+    onClose,
+    showModal,
+}:{
+    onClose: (arg0: boolean) => void,
+    showModal: boolean
+}) => {
 
     const cartCtx = useContext(CartContext);
     const userProgressCtx = useContext(UserProgressContext);
@@ -40,26 +48,28 @@ const Checkout = () => {
     );
 
     return (
-      <Dialog header='Checkout' visible={true} onHide={() => {}}>
+        <>
+        {createPortal(
+            <Dialog header='Checkout' visible={showModal} onHide={() => onClose}>
+                <form onSubmit={handleSubmit}>
+                <h2>Checkout</h2>
+                <p>Total Amount: {cartTotal}</p>
+                {/* <p>Total Amount: {currencyFormatter.format(cartTotal)}</p> */}
 
-      </Dialog>
-    // <modal open={userProgressCtx.progress === 'checkout'} onClose={handleClose}>
-    //   <form onSubmit={handleSubmit}>
-    //     <h2>Checkout</h2>
-    //     <p>Total Amount: {cartTotal}</p>
-    //     {/* <p>Total Amount: {currencyFormatter.format(cartTotal)}</p> */}
+                <Input label="Full Name" type="text" id="name" />
+                <Input label="E-Mail Address" type="email" id="email" />
+                <Input label="Street" type="text" id="street" />
+                <div className="control-row">
+                <Input label="Postal Code" type="text" id="postal-code" />
+                <Input label="City" type="text" id="city" />
+                </div>
 
-    //     <Input label="Full Name" type="text" id="name" />
-    //     <Input label="E-Mail Address" type="email" id="email" />
-    //     <Input label="Street" type="text" id="street" />
-    //     <div className="control-row">
-    //       <Input label="Postal Code" type="text" id="postal-code" />
-    //       <Input label="City" type="text" id="city" />
-    //     </div>
-
-    //     <p className="modal-actions">{actions}</p>
-    //   </form>
-    // </modal>
+                <p className="modal-actions">{actions}</p>
+            </form>
+            </Dialog>,
+            document.getElementById('root') as Element
+        )}
+        </>
   );
 }
 
